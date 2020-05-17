@@ -8,7 +8,7 @@ public class Main {
 
 
         var a=LoggerParser.GetReports("test2.xml");
-        var b = new InteresByCompares(a);
+        var b = new InteresByTendency(a);
         var s = b.getInterestPoints();
         for (Report r:a) {
             System.out.println("Agent Loc: ("+r.getAgentLocation().getX()
