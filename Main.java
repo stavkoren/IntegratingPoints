@@ -8,6 +8,8 @@ public class Main {
 
 
         var a=LoggerParser.GetReports("test2.xml");
+        var b = new InteresByChecks(a);
+        var s = b.getInterestPoints();
         for (Report r:a) {
             System.out.println("Agent Loc: ("+r.getAgentLocation().getX()
                     +","+r.getAgentLocation().getY()+")");
