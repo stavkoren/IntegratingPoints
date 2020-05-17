@@ -3,7 +3,7 @@ import java.util.List;
 
 public class InteresByCompares {
     private List<Report> report;
-    private int threshold;
+    private double threshold;
 
     public InteresByCompares(List<Report> r) {
         this.report = r;
@@ -21,11 +21,11 @@ public class InteresByCompares {
 
     //by average
     private void setThreshold(){
-        int sum = 0;
+        List<Integer> valuesList = new LinkedList<>();
         for (var r : this.report) {
-            sum += r.GetPointsCompared().size();
+            valuesList.add(r.GetPointsCompared().size());
         }
-        this.threshold = sum/this.report.size();
+        this.threshold = MathUtils.getMean(valuesList) + MathUtils.getSTD(valuesList);
     }
 
 }
