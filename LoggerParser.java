@@ -26,9 +26,7 @@ public class LoggerParser {
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName(POINT);
             for (int temp=0;temp<nList.getLength();temp++){
-                Node nNode=nList.item(temp);
-                if(nNode.getNodeType()==Node.ELEMENT_NODE){
-                    Element eElement=(Element) nNode;
+                    Element eElement=(Element) nList.item(temp);
                     Report report=new Report(parsePoint(eElement.getAttribute(LOCATION)));
                     NodeList pointsChecks=eElement.getElementsByTagName(CHECK);
                     for (int i=0;i<pointsChecks.getLength();i++){
@@ -41,8 +39,6 @@ public class LoggerParser {
                         report.AddPointCompared(p);
                     }
                     reports.add(report);
-
-                }
             }
             return reports;
         } catch (Exception e) {
@@ -54,11 +50,11 @@ public class LoggerParser {
         //parse (x,y) to Point
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(s);
-        while (m.find()) {
-            return  new Point(Integer.parseInt(m.group()),
-                    Integer.parseInt(m.group()));
-        }
-        return null;
+        m.find();
+        int x=Integer.parseInt(m.group());
+        m.find();
+        int y=Integer.parseInt(m.group());
+        return  new Point(x,y);
     }
     private static Pair<Point, Point> parseTwoPoints(String s){
         String[] splitCoordinates=s.split("\\),\\(",2);

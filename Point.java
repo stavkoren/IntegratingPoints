@@ -76,4 +76,8 @@ public class Point {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "("+getX()+","+getY()+")";
+    }
 }
