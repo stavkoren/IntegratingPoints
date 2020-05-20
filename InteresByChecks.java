@@ -1,7 +1,9 @@
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
-public class InteresByChecks {
+public class InteresByChecks implements InteresMethod {
     private List<Report> report;
     private double threshold;
 
@@ -10,8 +12,8 @@ public class InteresByChecks {
         this.setThreshold();
     }
 
-    public List<Point> getInterestPoints() {
-        List<Point> pointList = new LinkedList<>();
+    public Set<Point> getInterestPoints() {
+        Set<Point> pointList = new HashSet<>();
         for (var r : this.report) {
             if(r.GetPointsChecked().size() > this.threshold)
                 pointList.add(new Point(r.getAgentLocation()));
@@ -19,7 +21,6 @@ public class InteresByChecks {
         return pointList;
     }
 
-    //by average
     private void setThreshold(){
         List<Integer> valuesList = new LinkedList<>();
         for (var r : this.report) {

@@ -1,6 +1,5 @@
-import sun.rmi.runtime.Log;
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,8 +7,9 @@ public class Main {
 
 
         var a=LoggerParser.GetReports("test2.xml");
-        var b = new InteresByTendency(a);
-        var s = b.getInterestPoints();
+        var b = new InteresPointFinder(a);
+        var s = b.getInteresPoints();
+
         for (Report r:a) {
             System.out.println("Agent Loc: ("+r.getAgentLocation().getX()
                     +","+r.getAgentLocation().getY()+")");

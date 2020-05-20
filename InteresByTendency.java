@@ -1,7 +1,10 @@
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
-public class InteresByTendency {
+
+public class InteresByTendency implements InteresMethod {
     static private final int NORTH = 1;
     static private final int NORTH_EAST = 2;
     static private final int EAST = 3;
@@ -32,8 +35,8 @@ public class InteresByTendency {
     }
 
 
-    public List<Point> getInterestPoints() {
-        List<Point> list = new LinkedList<>();
+    public Set<Point> getInterestPoints() {
+        Set<Point> list = new HashSet<>();
         for (Point p : this.pointsList) {
             if (p.getInfo() != this.trend) {
                 if (this.trend > this.threshold)
