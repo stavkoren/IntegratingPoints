@@ -26,6 +26,6 @@ public class InteresByChecks implements InteresMethod {
         for (var r : this.report) {
             valuesList.add(r.GetPointsChecked().size());
         }
-        this.threshold = MathUtils.getMean(valuesList) + MathUtils.getSTD(valuesList);
+        this.threshold = MathUtils.getMean(valuesList) + 2*MathUtils.getSTD(valuesList);
     }
 }
