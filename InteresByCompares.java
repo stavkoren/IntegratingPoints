@@ -12,6 +12,7 @@ public class InteresByCompares implements InteresMethod {
         this.setThreshold();
     }
 
+    //check which points are interesting (by compares)
     public Set<Point> getInterestPoints() {
         Set<Point> pointList = new HashSet<>();
         for (var r : this.report) {
@@ -21,12 +22,13 @@ public class InteresByCompares implements InteresMethod {
         return pointList;
     }
 
+    //threshold
     private void setThreshold(){
         List<Integer> valuesList = new LinkedList<>();
         for (var r : this.report) {
             valuesList.add(r.GetPointsCompared().size());
         }
-        this.threshold = MathUtils.getMean(valuesList) + 2*MathUtils.getSTD(valuesList);
+        this.threshold = MathUtils.getMean(valuesList) + 2*MathUtils.getSTD(valuesList); //mean + 2std
     }
 
 }
