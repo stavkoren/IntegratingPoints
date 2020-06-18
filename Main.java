@@ -5,7 +5,7 @@ import org.apache.commons.cli.*;
 
 
 public class Main {
-    private static final String XML_FILE_FLGA = "x";
+    private static final String XML_FILE_FLAG = "x";
     private static final String OUTPUT_FILE_FLAG = "o";
 
     public static void main(String[] args) {
@@ -23,12 +23,12 @@ public class Main {
             return;
         }
         //check if xml file was set
-        if (!cmd.hasOption(XML_FILE_FLGA)) {
+        if (!cmd.hasOption(XML_FILE_FLAG)) {
             System.err.println("XML File didn't set");
             return;
         }
 
-        var a = LoggerParser.GetReports(cmd.getOptionValue(XML_FILE_FLGA));
+        var a = LoggerParser.GetReports(cmd.getOptionValue(XML_FILE_FLAG));
         var b = new InteresPointFinder(a);
         var s = b.getInteresPoints();
 
@@ -53,7 +53,7 @@ public class Main {
     //CLI Options
     private static Options getCLIOptions() {
         Options options = new Options();
-        options.addOption(OptionBuilder.withArgName("file").hasArg().withDescription("xml file").create(XML_FILE_FLGA));
+        options.addOption(OptionBuilder.withArgName("file").hasArg().withDescription("xml file").create(XML_FILE_FLAG));
         options.addOption(OptionBuilder.withArgName("file").hasArg().withDescription("output file. if didn't set - use console").create(OUTPUT_FILE_FLAG));
         return options;
     }
