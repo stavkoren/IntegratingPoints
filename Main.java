@@ -53,8 +53,8 @@ public class Main {
     //CLI Options
     private static Options getCLIOptions() {
         Options options = new Options();
-        options.addOption(OptionBuilder.withArgName("file").hasArg().withDescription("xml file").create(XML_FILE_FLAG));
-        options.addOption(OptionBuilder.withArgName("file").hasArg().withDescription("output file. if didn't set - use console").create(OUTPUT_FILE_FLAG));
+        options.addOption(Option.builder(OUTPUT_FILE_FLAG).hasArg().argName("file").desc("output file. if didn't set - use console").build());
+        options.addOption(Option.builder(XML_FILE_FLAG).hasArg().argName("file").desc("xml file").build());
         return options;
     }
 }
