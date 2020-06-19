@@ -4,7 +4,11 @@ The programe will output all intresting points chosen by specific criteria.
 
 ## Usage
 Run the programe with these arguments:
-XML file- the output of coverage_simulator program
+```
+ -h          print this message
+ -o <file>   output file. if didn't set - use console
+ -x <file>   xml file
+ ```
 
 ### Strategy
 We defined intersesting points by:
