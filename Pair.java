@@ -1,3 +1,4 @@
+//A version of tuple in java
 public class Pair<L,R> {
 
     private final L left;

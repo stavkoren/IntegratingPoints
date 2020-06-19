@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 import java.util.List;
 
+//Report object for keeping location info
 public class Report {
     private Point agentLocation;
     private List<Pair<Point,Point>> pointsCompared;

@@ -1,5 +1,6 @@
 import java.util.Objects;
 
+//save location on map
 public class Point {
     private int x;
     private int y;
@@ -67,6 +68,7 @@ public class Point {
     }
 
     @Override
+    //compare points
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
