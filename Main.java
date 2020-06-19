@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.StringJoiner;
 
 import org.apache.commons.cli.*;
 
@@ -50,9 +51,11 @@ public class Main {
         } else {
             pr = new PrintWriter(System.out);
         }
+        StringJoiner joiner = new StringJoiner(",");
         for (var p : s) {
-            pr.println(p.toString());
+            joiner.add(p.toString());
         }
+        pr.print(joiner.toString());
         pr.close();
     }
 
