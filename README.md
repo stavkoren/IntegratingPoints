@@ -6,7 +6,7 @@ The programe will output all intresting points chosen by specific criteria.
 Run the programe with these arguments:
 XML file- the output of coverage_simulator program
 
-###Strategy
+### Strategy
 We defined intersesting points by:
 -Large quantety of tested points
 -Large quantety of compared points
