@@ -16,9 +16,7 @@ public class InteresByTendency implements InteresMethod {
     static private final int IN_PLACE = 9;
 
     private List<Point> pointsList = new LinkedList<>();
-    private int trend = IN_PLACE;
-    private int steps = 0;
-    private final int threshold = 3;
+    private double threshold;
 
     public InteresByTendency(List<Report> r) {
         Point first = new Point(r.get(0).getAgentLocation());
@@ -33,21 +31,33 @@ public class InteresByTendency implements InteresMethod {
             this.pointsList.add(newPoint);
             prev = newPoint;
         }
+        this.setThreashold();
     }
+
+    private void setThreashold() {
+        List<Integer> valuesList = new LinkedList<>();
+        int step = 0;
+        int tren = IN_PLACE;
+        for (Point p : this.pointsList) {
+            if (p.getInfo() != tren) {
+                step = 0;
+                tren = p.getInfo();
+            } else {
+                step += 1;
+            }
+            p.setValue(step);
+            valuesList.add(step);
+        }
+        this.threshold = MathUtils.getMean(valuesList) + 1*MathUtils.getSTD(valuesList); //mean + 1std
+    }
+
 
     //check if the tendency is more than threshold. if yes - mark as interesting point
     public Set<Point> getInterestPoints() {
         Set<Point> list = new HashSet<>();
         for (Point p : this.pointsList) {
-            if (p.getInfo() != this.trend) {
-                if (this.trend > this.threshold)
-                    list.add(new Point(p));
-                this.steps = 0;
-                this.trend = p.getInfo();
-            } else {
-                this.steps += 1;
-            }
-
+            if (p.getValue() >= this.threshold)
+                list.add(p);
         }
         return list;
     }
