@@ -4,7 +4,7 @@ import java.util.Objects;
 public class Point {
     private int x;
     private int y;
-    private Integer value;
+    private float value;
     private int beenHereCounter = 0;
 
 
@@ -21,7 +21,7 @@ public class Point {
         this(0, 0);
     }
 
-    public Point(Integer value) {
+    public Point(float value) {
         this(0, 0);
         this.value = value;
     }
@@ -50,11 +50,11 @@ public class Point {
     }
 
 
-    public Integer getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(float value) {
         this.value = value;
     }
 

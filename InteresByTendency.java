@@ -36,19 +36,19 @@ public class InteresByTendency implements InteresMethod {
 
     private void setThreashold() {
         List<Integer> valuesList = new LinkedList<>();
-        int step = 0;
-        int tren = IN_PLACE;
+        int step = -1;
+        int trend = IN_PLACE;
         for (Point p : this.pointsList) {
-            if (p.getInfo() != tren) {
+            if (p.getInfo() != trend) {
                 step = 0;
-                tren = p.getInfo();
+                trend = p.getInfo();
             } else {
                 step += 1;
             }
             p.setValue(step);
             valuesList.add(step);
         }
-        this.threshold = MathUtils.getMean(valuesList) + 1*MathUtils.getSTD(valuesList); //mean + 1std
+        this.threshold = Math.ceil(MathUtils.getMean(valuesList) + 1*MathUtils.getSTD(valuesList)); //mean + 1std and than round it up
     }
 
 
@@ -56,7 +56,7 @@ public class InteresByTendency implements InteresMethod {
     public Set<Point> getInterestPoints() {
         Set<Point> list = new HashSet<>();
         for (Point p : this.pointsList) {
-            if (p.getValue() >= this.threshold)
+            if (p.getValue() > this.threshold)
                 list.add(p);
         }
         return list;
