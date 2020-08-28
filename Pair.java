@@ -1,8 +1,8 @@
 //A version of tuple in java
 public class Pair<L,R> {
 
-    private final L left;
-    private final R right;
+    private  L left;
+    private  R right;
 
     public Pair(L left, R right) {
         assert left != null;
@@ -11,9 +11,17 @@ public class Pair<L,R> {
         this.left = left;
         this.right = right;
     }
+    public Pair(){
+    }
 
     public L getLeft() { return left; }
     public R getRight() { return right; }
+    public void setLeft(L left){
+        this.left=left;
+    }
+    public void setRight(R right){
+        this.right=right;
+    }
 
     @Override
     public int hashCode() { return left.hashCode() ^ right.hashCode(); }
@@ -26,4 +34,8 @@ public class Pair<L,R> {
                 this.right.equals(pairo.getRight());
     }
 
+    @Override
+    public String toString() {
+        return "("+getLeft().toString()+","+getRight().toString()+")";
+    }
 }

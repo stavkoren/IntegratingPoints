@@ -1,7 +1,4 @@
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class InteresPointFinder {
     private List<InteresMethod> methods = new LinkedList<>();
@@ -13,10 +10,20 @@ public class InteresPointFinder {
         this.methods.add(new InteresByTendency(r));
     }
 
-    public Set<Point> getInteresPoints() {
-        Set<Point> pointSet = new HashSet<>();
-        for (InteresMethod m : this.methods)
-            pointSet.addAll(m.getInterestPoints());
-        return pointSet;
+    public List<Report> updateReports() {
+        ArrayList<Report> reports = new ArrayList<>();
+        reports.addAll(this.methods.get(0).updateReports());
+        for (int i=1;i<this.methods.size(); i++){
+            List<Report> newReports=methods.get(i).updateReports();
+            for (int r=0; r<reports.size();r++){
+                if (reports.get(i).getInterestingPoint()==false
+                && newReports.get(i).getInterestingPoint()==true){
+                    reports.set(i,newReports.get(i));
+                }
+            }
+        }
+        return reports;
     }
+
+
 }

@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.StringJoiner;
 
@@ -10,8 +11,7 @@ public class Main {
     private static final String OUTPUT_FILE_FLAG = "o";
     private static final String HELP_FLAG = "h";
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
         //cli parse
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
@@ -37,7 +37,9 @@ public class Main {
 
         var a = LoggerParser.GetReports(cmd.getOptionValue(XML_FILE_FLAG));
         var b = new InteresPointFinder(a);
-        var s = b.getInteresPoints();
+        var s = b.updateReports();
+        WriteReports.serializeToXML(s);
+        System.out.println("1");
 
         PrintWriter pr;
         //if output file didn't set - use console.

@@ -3,7 +3,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,12 +33,12 @@ public class LoggerParser {
                     NodeList pointsChecks=eElement.getElementsByTagName(CHECK);
                     for (int i=0;i<pointsChecks.getLength();i++){
                         Point p =parsePoint(pointsChecks.item(i).getTextContent());
-                        report.AddPointChecked(p);
+                        report.addPointChecked(p);
                     }
                     NodeList pointsCompared=eElement.getElementsByTagName(COMPARE);
                     for (int i=0;i<pointsCompared.getLength();i++){
                         var p=parseTwoPoints(pointsCompared.item(i).getTextContent());
-                        report.AddPointCompared(p);
+                        report.addPointCompared(p);
                     }
                     reports.add(report);
             }

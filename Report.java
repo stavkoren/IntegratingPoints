@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -6,24 +7,60 @@ public class Report {
     private Point agentLocation;
     private List<Pair<Point,Point>> pointsCompared;
     private List<Point> pointsChecked;
+    private boolean isInterestingPoint;
 
     public Report(Point agentLocation){
         this.agentLocation=agentLocation;
         pointsChecked=new LinkedList<>();
         pointsCompared= new LinkedList<>();
+        isInterestingPoint =false;
     }
-    public void AddPointCompared(Pair<Point,Point> p){
+    public Report(){
+
+    }
+    public void addPointCompared(Pair<Point,Point> p){
         this.pointsCompared.add(p);
     }
 
-    public void AddPointChecked(Point p){
+    public void addPointChecked(Point p){
         this.pointsChecked.add(p);
     }
-    public List<Point> GetPointsChecked(){
+    public List<Point> getPointsChecked(){
         return this.pointsChecked;
     }
-    public List<Pair<Point,Point>> GetPointsCompared(){
+    public void setPointsChecked(java.util.List<Point> pointsChecked) {
+        this.pointsChecked = pointsChecked;
+    }
+
+    public List<Pair<Point,Point>> getPointsCompared(){
         return this.pointsCompared;
     }
+    public void setPointsCompared(List<Pair<Point,Point>> pointsCompared){
+        this.pointsCompared=pointsCompared;
+    }
     public Point getAgentLocation(){return this.agentLocation;}
+    public void setAgentLocation(Point loc){
+        this.agentLocation=loc;
+    }
+
+    public void IsInterestingPoint(){
+     this.isInterestingPoint =true;
+    }
+    public boolean getInterestingPoint(){
+
+        return this.isInterestingPoint;
+    }
+
+    public void setInterestingPoint(boolean interestingPoint) {
+        isInterestingPoint = interestingPoint;
+    }
+
+    @Override
+    public String toString() {
+        return "Report ["+ "location="+ agentLocation.toString()+
+                ", isInteresting="+ isInterestingPoint +
+                ", pointsChecked="+ Arrays.toString(pointsChecked.toArray())+
+                ", pointsCompared="+ Arrays.toString(pointsCompared.toArray())+
+                "]";
+    }
 }

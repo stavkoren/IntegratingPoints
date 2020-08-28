@@ -1,7 +1,4 @@
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class InteresByTendency implements InteresMethod {
@@ -15,20 +12,23 @@ public class InteresByTendency implements InteresMethod {
     static private final int WEST_NORTH = 8;
     static private final int IN_PLACE = 9;
 
-    private List<Point> pointsList = new LinkedList<>();
+    private List<Pair<Point,Integer>> pointsList;
+    private LinkedList<Report> reports;
     private double threshold;
 
     public InteresByTendency(List<Report> r) {
+        pointsList=new LinkedList<>();
+        reports= (LinkedList<Report>) r;
         Point first = new Point(r.get(0).getAgentLocation());
         first.setInfo(IN_PLACE);
-        this.pointsList.add(first);
+        this.pointsList.add(new Pair<Point,Integer>(first,0));
         Point prev = first;
 
         //set from where came
         for (int i = 1; i < r.size(); ++i) {
             Point newPoint = new Point(r.get(i).getAgentLocation());
             newPoint.setInfo(from(prev, newPoint));
-            this.pointsList.add(newPoint);
+            this.pointsList.add(new Pair<Point,Integer>(newPoint,i));
             prev = newPoint;
         }
         this.setThreashold();
@@ -38,14 +38,14 @@ public class InteresByTendency implements InteresMethod {
         List<Integer> valuesList = new LinkedList<>();
         int step = -1;
         int trend = IN_PLACE;
-        for (Point p : this.pointsList) {
-            if (p.getInfo() != trend) {
+        for (Pair<Point,Integer> p : this.pointsList) {
+            if (p.getLeft().getInfo() != trend) {
                 step = 0;
-                trend = p.getInfo();
+                trend = p.getLeft().getInfo();
             } else {
                 step += 1;
             }
-            p.setValue(step);
+            p.getLeft().setValue(step);
             valuesList.add(step);
         }
         this.threshold = Math.ceil(MathUtils.getMean(valuesList) + 1*MathUtils.getSTD(valuesList)); //mean + 1std and than round it up
@@ -53,13 +53,16 @@ public class InteresByTendency implements InteresMethod {
 
 
     //check if the tendency is more than threshold. if yes - mark as interesting point
-    public Set<Point> getInterestPoints() {
-        Set<Point> list = new HashSet<>();
-        for (Point p : this.pointsList) {
-            if (p.getValue() > this.threshold)
-                list.add(p);
+    public List<Report> updateReports() {
+        for (Pair<Point,Integer> p : this.pointsList) {
+            if (p.getLeft().getValue() > this.threshold){
+                Report r=this.reports.get(p.getRight());
+                r.IsInterestingPoint();
+                reports.set(p.getRight(),r);
+            }
+
         }
-        return list;
+        return reports;
     }
 
 
