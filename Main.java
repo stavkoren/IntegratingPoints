@@ -5,6 +5,8 @@ import java.util.StringJoiner;
 
 import org.apache.commons.cli.*;
 
+import javax.xml.transform.stream.StreamResult;
+
 
 public class Main {
     private static final String XML_FILE_FLAG = "x";
@@ -38,27 +40,26 @@ public class Main {
         var a = LoggerParser.GetReports(cmd.getOptionValue(XML_FILE_FLAG));
         var b = new InteresPointFinder(a);
         var s = b.updateReports();
-        WriteReports.serializeToXML(s);
-        System.out.println("1");
 
-        PrintWriter pr;
+
+        StreamResult sr;
         //if output file didn't set - use console.
         if (cmd.hasOption(OUTPUT_FILE_FLAG)) {
             try {
-                pr = new PrintWriter(new File(cmd.getOptionValue(OUTPUT_FILE_FLAG)));
+                sr = new StreamResult(new File(cmd.getOptionValue(OUTPUT_FILE_FLAG)));
             } catch (Exception e) {
                 System.err.println("Error when create output file");
                 return;
             }
         } else {
-            pr = new PrintWriter(System.out);
+            sr = new StreamResult(System.out);
         }
-        StringJoiner joiner = new StringJoiner(",");
-        for (var p : s) {
-            joiner.add(p.toString());
-        }
-        pr.print(joiner.toString());
-        pr.close();
+
+
+        WriteReports wr = new WriteReports();
+        wr.write(s);
+        wr.save(sr);
+
     }
 
     //CLI Options

@@ -46,7 +46,7 @@ public class Report {
     public void IsInterestingPoint(){
      this.isInterestingPoint =true;
     }
-    public boolean getInterestingPoint(){
+    public Boolean getInterestingPoint(){
 
         return this.isInterestingPoint;
     }
