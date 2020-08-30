@@ -37,18 +37,18 @@ public class WriteReports {
     }
 
     public void write(List<Report> reportList) {
+        //for each report (point), will create an element
         for (Report r : reportList) {
             Element currentPoint = this.doc.createElement("Point");
             this.rootElement.appendChild(currentPoint);
-
+            //point location
             Attr loc = doc.createAttribute("location");
             loc.setValue(getPointAsString(r.getAgentLocation()));
             currentPoint.setAttributeNode(loc);
-
+            //this point is interesting?
             Attr isInters = doc.createAttribute("interesting");
             isInters.setValue(r.getInterestingPoint().toString());
             currentPoint.setAttributeNode(isInters);
-
         }
 
 
