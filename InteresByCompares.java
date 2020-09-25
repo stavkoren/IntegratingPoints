@@ -15,20 +15,21 @@ public class InteresByCompares implements InteresMethod {
     //check which points are interesting (by compares)
     public List<Report> updateReports() {
         for (var r : this.report) {
-            if(r.getPointsCompared().size() > this.threshold)
+            if (r.getPointsCompared().size() > this.threshold) {
                 r.IsInterestingPoint();
-                r.setScore(r.getScore() + r.getPointsCompared().size() - this.threshold);
+                r.setScore(r.getScore() + r.getPointsCompared().size()/this.threshold);
+            }
         }
         return this.report;
     }
 
     //threshold
-    private void setThreshold(){
+    private void setThreshold() {
         List<Integer> valuesList = new LinkedList<>();
         for (var r : this.report) {
             valuesList.add(r.getPointsCompared().size());
         }
-        this.threshold = MathUtils.getMean(valuesList) + 2*MathUtils.getSTD(valuesList); //mean + 2std
+        this.threshold = MathUtils.getMean(valuesList) + 2 * MathUtils.getSTD(valuesList); //mean + 2std
     }
 
 }
