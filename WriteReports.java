@@ -49,6 +49,10 @@ public class WriteReports {
             Attr isInters = doc.createAttribute("interesting");
             isInters.setValue(r.getInterestingPoint().toString());
             currentPoint.setAttributeNode(isInters);
+            //adding score attribute
+            Attr score = doc.createAttribute("score");
+            score.setValue(String.valueOf(r.getScore()));
+            currentPoint.setAttributeNode(score);
         }
 
 

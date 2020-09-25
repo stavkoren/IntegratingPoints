@@ -17,6 +17,7 @@ public class InteresByCompares implements InteresMethod {
         for (var r : this.report) {
             if(r.getPointsCompared().size() > this.threshold)
                 r.IsInterestingPoint();
+                r.setScore(r.getScore() + r.getPointsCompared().size() - this.threshold);
         }
         return this.report;
     }

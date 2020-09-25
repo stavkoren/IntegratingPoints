@@ -58,9 +58,9 @@ public class InteresByTendency implements InteresMethod {
             if (p.getLeft().getValue() > this.threshold){
                 Report r=this.reports.get(p.getRight());
                 r.IsInterestingPoint();
+                r.setScore(r.getScore() + p.getLeft().getValue() - this.threshold);
                 reports.set(p.getRight(),r);
             }
-
         }
         return reports;
     }

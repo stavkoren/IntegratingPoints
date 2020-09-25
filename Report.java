@@ -8,6 +8,7 @@ public class Report {
     private List<Pair<Point,Point>> pointsCompared;
     private List<Point> pointsChecked;
     private boolean isInterestingPoint;
+    private double score = 0;
 
     public Report(Point agentLocation){
         this.agentLocation=agentLocation;
@@ -46,6 +47,8 @@ public class Report {
     public void IsInterestingPoint(){
      this.isInterestingPoint =true;
     }
+    public void setScore(double score) {this.score = score;}
+    public double getScore() {return this.score;}
     public Boolean getInterestingPoint(){
 
         return this.isInterestingPoint;

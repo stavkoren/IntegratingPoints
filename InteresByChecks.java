@@ -15,6 +15,7 @@ public class InteresByChecks implements InteresMethod {
         for (var r : this.report) {
             if(r.getPointsChecked().size() > this.threshold)
                 r.IsInterestingPoint();
+                r.setScore(r.getScore() + r.getPointsChecked().size()-this.threshold);
         }
         return this.report;
     }
